@@ -1,0 +1,3 @@
+covertype-elevation-gap-shift/environment/task_inputs/*.csv
+covertype-elevation-gap-shift/tests/test_labels.csv
+__pycache__/

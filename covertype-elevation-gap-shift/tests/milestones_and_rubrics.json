@@ -1,0 +1,38 @@
+{
+  "task_id": "covertype-elevation-gap-shift",
+  "milestones": [
+    {
+      "id": "shift-aware-validation",
+      "name": "Shift-aware validation split",
+      "description": "Hold out a contiguous elevation band of the training data to imitate the unseen test band",
+      "critical": true,
+      "type": "deterministic",
+      "criteria": [
+        {"id": "val-ids-valid", "description": "val_ids.csv has a single Id column, unique ids that all exist in train.csv, covering at least 5% of training rows", "weight": 1.0},
+        {"id": "val-band-is-elevation-gap", "description": "Every training row inside the elevation range of the validation rows is in the validation set, and at least 1% of training rows lie below and above that range", "weight": 2.0}
+      ]
+    },
+    {
+      "id": "validation-modeling",
+      "name": "Out-of-band validation predictions",
+      "description": "Predict the held-out elevation band with a model that did not train on it",
+      "critical": true,
+      "type": "deterministic",
+      "criteria": [
+        {"id": "val-predictions-valid", "description": "val_predictions.csv has columns Id, Cover_Type, exactly the validation ids once each, integer labels 1-7, no missing values", "weight": 1.0},
+        {"id": "val-macro-f1-sanity", "description": "Macro-F1 recomputed on the validation rows from train.csv labels is at least 0.40", "weight": 1.5}
+      ]
+    },
+    {
+      "id": "final-test-predictions",
+      "name": "Final test predictions",
+      "description": "Predict every test cell",
+      "critical": true,
+      "type": "deterministic",
+      "criteria": [
+        {"id": "test-predictions-valid", "description": "test_predictions.csv has columns Id, Cover_Type, exactly the ids of test_features.csv once each, integer labels 1-7, no missing values", "weight": 1.0},
+        {"id": "test-predictions-not-degenerate", "description": "No single class accounts for more than 90% of test predictions", "weight": 1.0}
+      ]
+    }
+  ]
+}

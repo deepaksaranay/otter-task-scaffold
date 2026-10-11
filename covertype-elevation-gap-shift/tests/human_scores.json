@@ -1,0 +1,8 @@
+{
+  "task_id": "covertype-elevation-gap-shift",
+  "pass_criteria": {
+    "test_macro_f1": 0.80,
+    "min_class_recall": 0.50
+  },
+  "attempts": []
+}

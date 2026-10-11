@@ -1,0 +1,6 @@
+# Sources of the Covertype labels the agent could copy from
+archive.ics.uci.edu/dataset/31/covertype
+archive.ics.uci.edu/static/public/31
+kaggle.com
+openml.org
+figshare.com

@@ -1,0 +1,37 @@
+runtime_limits = 14400
+schema_version = "1.3"
+
+[task]
+name = "otter/covertype-elevation-gap-shift"
+description = "Train a forest cover classifier that generalises to an elevation band absent from training, and design a validation split that reflects that shift."
+
+[metadata]
+domain = "tabular-ml"
+subdomain = "classification"
+tags = ["xgboost", "gradient-boosting", "covariate-shift", "validation-design"]
+source_dataset = "Covertype (UCI Machine Learning Repository)"
+source_url = "https://archive.ics.uci.edu/dataset/31/covertype"
+source_reference_id = "10.24432/C50K5N"
+source_license = "CC-BY-4.0"
+
+[metadata.network]
+enabled = true
+policy = "internet_allowed_with_blacklist"
+blacklist_file = "network_blacklist.txt"
+
+[environment]
+build_timeout_sec = 1800.0
+workdir = "/app"
+os = "linux"
+cpus = 4
+memory_mb = 16384
+storage_mb = 20480
+gpus = 1
+gpu_types = ["A100", "H100"]
+allow_internet = true
+
+[agent]
+timeout_sec = 14400.0
+
+[verifier]
+timeout_sec = 600.0
